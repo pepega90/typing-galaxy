@@ -1,0 +1,85 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build debug",
+            "type": "process",
+            "command": "make",
+            "args": [
+                "PLATFORM=PLATFORM_DESKTOP",
+                "BUILD_MODE=DEBUG"
+            ],
+            "windows": {
+                "command": "C:/raylib/mingw/bin/mingw32-make.exe",
+                "args": [
+                    "RAYLIB_PATH=C:/raylib/raylib",
+                    "PROJECT_NAME=${fileBasenameNoExtension}",
+                    "OBJS=*.cpp",
+                    "BUILD_MODE=DEBUG"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "PROJECT_NAME=${fileBasenameNoExtension}",
+                    "OBJS=*.cpp",
+                    "BUILD_MODE=DEBUG"
+                ]
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "build release",
+            "type": "process",
+            "command": "make",
+            "args": [
+                "PLATFORM=PLATFORM_DESKTOP"
+            ],
+            "windows": {
+                "command": "C:/raylib/mingw/bin/mingw32-make.exe",
+                "args": [
+                    "RAYLIB_PATH=C:/raylib/raylib",
+                    "PROJECT_NAME=${fileBasenameNoExtension}",
+                    "OBJS=*.cpp"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "PROJECT_NAME=${fileBasenameNoExtension}",
+                    "OBJS=*.cpp"
+                ]
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:\\raylib\\mingw\\bin\\g++.exe",
+            "args": [
+                "-g",
+                "${workspaceFolder}\\*.cpp",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "C:\\raylib\\mingw\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "compiler: C:\\raylib\\mingw\\bin\\g++.exe"
+        }
+    ]
+}
