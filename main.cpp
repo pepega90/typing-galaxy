@@ -9,15 +9,15 @@
 using namespace std;
 
 // setup window
-const int WIDTH{ 600 };
-const int HEIGHT{ 480 };
+const int WIDTH{600};
+const int HEIGHT{480};
 
 struct Bullet
 {
     Texture2D img;
     Rectangle rect;
-    int speedX{ 0 };
-    int speedY{ 0 };
+    int speedX{0};
+    int speedY{0};
     bool active;
 
     void shoot()
@@ -33,7 +33,6 @@ struct Bullet
         rect.y = gunPos.y + 3;
     }
 };
-
 
 struct Meteor
 {
@@ -56,17 +55,17 @@ int main()
     Texture2D background = LoadTexture("texture/bg.png");
     // canon, base untuk gun
     Texture2D canon = LoadTexture("texture/ufoYellow.png");
-    Vector2 canonPos = { 20, HEIGHT / 2 };
-    Rectangle canonRect = { canonPos.x, canonPos.y, (float)canon.width * .5f, (float)canon.height * .5f };
+    Vector2 canonPos = {20, HEIGHT / 2};
+    Rectangle canonRect = {canonPos.x, canonPos.y, (float)canon.width * .5f, (float)canon.height * .5f};
 
     // rotate gambar 90deg counter clockwise
     Image gunRotate = LoadImage("texture/gun00.png");
     ImageRotateCCW(&gunRotate);
     Texture2D gun = LoadTextureFromImage(gunRotate);
-    Rectangle sourceRec = { 0.0f, 0.0f, (float)gun.width, (float)gun.height };
-    Rectangle gunPos = { 40, HEIGHT / 2 + 23, gun.width * .9f, gun.height * .9f };
+    Rectangle sourceRec = {0.0f, 0.0f, (float)gun.width, (float)gun.height};
+    Rectangle gunPos = {40, HEIGHT / 2 + 23, gun.width * .9f, gun.height * .9f};
 
-    // laser untuk peluru 
+    // laser untuk peluru
     Image laserRotate = LoadImage("texture/laser.png");
     ImageRotateCCW(&laserRotate);
     Bullet laser;
@@ -75,8 +74,7 @@ int main()
     laser.rect.y = gunPos.y + 3;
     laser.rect.width = laser.img.width;
     laser.rect.height = laser.img.height;
-    Rectangle laserSource = { 0.0f, 0.0f, (float)laser.img.width, (float)laser.img.height };
-
+    Rectangle laserSource = {0.0f, 0.0f, (float)laser.img.width, (float)laser.img.height};
 
     // initiate meteorList
     Meteor meteorList[METEOR_ALIVE];
@@ -96,9 +94,9 @@ int main()
     }
 
     // Meteor explosion
-    int regularExpFrame{ 9 };
-    int regularCurrentFrame{ 0 };
-    float regularLastUpdate{ 0.02 };
+    int regularExpFrame{9};
+    int regularCurrentFrame{0};
+    float regularLastUpdate{0.02};
     float regularRunningTime{};
 
     Texture2D regularExp[regularExpFrame]{
@@ -113,7 +111,7 @@ int main()
         LoadTexture("texture/regularExplosion08.png"),
     };
 
-    Rectangle regularExpRect{ 0, 0, (float)regularExp[1].width, (float)regularExp[1].height };
+    Rectangle regularExpRect{0, 0, (float)regularExp[1].width, (float)regularExp[1].height};
 
     // LoadSound
     Sound explosionSfx = LoadSound("sfx/Explosion2.wav");
@@ -131,7 +129,7 @@ int main()
 
     // membuat countdown
     int countdown = 20;
-    float lastUpdateCountdown{ 1.0 };
+    float lastUpdateCountdown{1.0};
     float runCountDown{};
 
     // inisialisasi array meteorList
@@ -146,7 +144,7 @@ int main()
         meteorList[i].explode = false;
         meteorList[i].kata = arr[GetRandomValue(0, x - 1)];
         meteorList[i].live = meteorList[i].kata.length();
-        meteorList[i].meteorSource = { 0.0f, 0.0f, (float)meteorList[i].img.width, (float)meteorList[i].img.height };
+        meteorList[i].meteorSource = {0.0f, 0.0f, (float)meteorList[i].img.width, (float)meteorList[i].img.height};
     }
 
     while (!WindowShouldClose())
@@ -178,7 +176,6 @@ int main()
             startGame = true;
             laser.active = true;
         }
-
 
         // main menu scene
         if (!startGame)
@@ -237,12 +234,11 @@ int main()
 
                         deg = angle * RAD2DEG;
                     }
-
                 }
 
                 if (laser.active)
                 {
-                    laser.resetPosition(Vector2{ gunPos.x, gunPos.y });
+                    laser.resetPosition(Vector2{gunPos.x, gunPos.y});
                 }
 
                 if (!laser.active)
@@ -259,7 +255,7 @@ int main()
                     {
                         // cout << "index ke i = " << i << " explode = " << meteorList[i].explode << endl;
 
-                        Vector2 move = Vector2MoveTowards(Vector2{ meteorList[i].rect.x, meteorList[i].rect.y }, Vector2{ gunPos.x, gunPos.y }, 1.0);
+                        Vector2 move = Vector2MoveTowards(Vector2{meteorList[i].rect.x, meteorList[i].rect.y}, Vector2{gunPos.x, gunPos.y}, 1.0);
                         meteorList[i].rect.x = move.x;
                         meteorList[i].rect.y = move.y;
                     }
@@ -315,9 +311,9 @@ int main()
                 // draw canon
                 DrawTextureEx(canon, canonPos, 0.0, 0.5, WHITE);
                 // draw gun canon
-                DrawTexturePro(gun, sourceRec, gunPos, Vector2{ 0.0, (float)gun.height / 2 }, deg, WHITE);
+                DrawTexturePro(gun, sourceRec, gunPos, Vector2{0.0, (float)gun.height / 2}, deg, WHITE);
                 // draw bullet canon
-                DrawTexturePro(laser.img, laserSource, laser.rect, Vector2{ 0.0, (float)gun.height / 2 }, deg, WHITE);
+                DrawTexturePro(laser.img, laserSource, laser.rect, Vector2{0.0, (float)gun.height / 2}, deg, WHITE);
 
                 // draw list of meteor
                 rotation++;
@@ -326,7 +322,7 @@ int main()
                     if (meteorList[i].alive)
                     {
 
-                        DrawTexturePro(meteorList[i].img, meteorList[i].meteorSource, meteorList[i].rect, Vector2{ (float)meteorList[i].img.width / 2, (float)meteorList[i].img.height / 2 }, rotation, WHITE);
+                        DrawTexturePro(meteorList[i].img, meteorList[i].meteorSource, meteorList[i].rect, Vector2{(float)meteorList[i].img.width / 2, (float)meteorList[i].img.height / 2}, rotation, WHITE);
 
                         DrawText(meteorList[i].kata.c_str(), meteorList[i].rect.x - meteorList[i].img.width / 2, meteorList[i].rect.y + meteorList[i].img.height, 20, WHITE);
 
@@ -344,9 +340,8 @@ int main()
                     regularExpRect.x = meteorList[idx].rect.x;
                     regularExpRect.y = meteorList[idx].rect.y;
 
-                    DrawTextureEx(regularExp[regularCurrentFrame], Vector2{ regularExpRect.x - meteorList[idx].img.width / 2, regularExpRect.y - meteorList[idx].img.height / 2 }, 0.0, 0.5, WHITE);
+                    DrawTextureEx(regularExp[regularCurrentFrame], Vector2{regularExpRect.x - meteorList[idx].img.width / 2, regularExpRect.y - meteorList[idx].img.height / 2}, 0.0, 0.5, WHITE);
                 }
-
 
                 // meteor explode animation
                 regularRunningTime += dt;
