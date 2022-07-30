@@ -9,8 +9,8 @@
 using namespace std;
 
 // setup window
-const int WIDTH{600};
-const int HEIGHT{480};
+const int WIDTH{800};
+const int HEIGHT{640};
 
 struct Bullet
 {
@@ -80,18 +80,83 @@ int main()
     Meteor meteorList[METEOR_ALIVE];
     // reading txt file, untuk mendapatkan list kata
     int x = 0;
-    string arr[100];
+    string arr[57];
+    string t[] = {
+        "help",
+        "publishing",
+        "background",
+        "attack",
+        "family",
+        "offender",
+        "jelly",
+        "predict",
+        "pottery",
+        "appreciate",
+        "put",
+        "bark",
+        "hilarious",
+        "bush",
+        "loyalty",
+        "look",
+        "rice",
+        "weakness",
+        "ridge",
+        "ancestor",
+        "salvation",
+        "participate",
+        "marathon",
+        "passive",
+        "illusion",
+        "tasty",
+        "displace",
+        "curve",
+        "surround",
+        "hear",
+        "eavesdrop",
+        "dump",
+        "provision",
+        "eyebrow",
+        "suppress",
+        "circle",
+        "computing",
+        "ideology",
+        "pastel",
+        "pole",
+        "establish",
+        "platform",
+        "salad",
+        "mechanical",
+        "belong",
+        "annual",
+        "size",
+        "stadium",
+        "formula",
+        "tropical",
+        "excuse",
+        "kettle",
+        "peasant",
+        "mind",
+        "freedom",
+        "chin",
+        "integrity"};
 
-    string kalimat;
-    ifstream baca("wordList.txt");
-    if (baca.is_open())
+    for (int i = 0; i < 57; i++)
     {
-        while (getline(baca, kalimat))
-        {
-            arr[x] = kalimat;
-            x++;
-        }
+        arr[i] = t[i];
+        x++;
     }
+
+    // string kalimat;
+    // ifstream baca("wordList.txt");
+    // if (baca.is_open())
+    // {
+
+    //     while (getline(baca, kalimat))
+    //     {
+    //         arr[x] = kalimat;
+    //         x++;
+    //     }
+    // }
 
     // Meteor explosion
     int regularExpFrame{9};
@@ -99,7 +164,7 @@ int main()
     float regularLastUpdate{0.02};
     float regularRunningTime{};
 
-    Texture2D regularExp[regularExpFrame]{
+    Texture2D regularExp[9]{
         LoadTexture("texture/regularExplosion00.png"),
         LoadTexture("texture/regularExplosion01.png"),
         LoadTexture("texture/regularExplosion02.png"),
@@ -128,7 +193,7 @@ int main()
     bool startGame{};
 
     // membuat countdown
-    int countdown = 20;
+    int countdown = 60;
     float lastUpdateCountdown{1.0};
     float runCountDown{};
 
@@ -136,7 +201,7 @@ int main()
     for (int i = 0; i < METEOR_ALIVE; i++)
     {
         meteorList[i].img = LoadTexture("texture/meteorBrown_med1.png");
-        meteorList[i].rect.x = 610;
+        meteorList[i].rect.x = WIDTH;
         meteorList[i].rect.y = GetRandomValue(10, 450);
         meteorList[i].rect.width = meteorList[i].img.width;
         meteorList[i].rect.height = meteorList[i].img.height;
@@ -154,7 +219,7 @@ int main()
         ClearBackground(BLACK);
         BeginDrawing();
         // draw background
-        DrawTextureEx(background, Vector2{}, 0.0, 1.0, WHITE);
+        DrawTextureEx(background, Vector2{}, 0.0, 2.0, WHITE);
 
         valChar = GetCharPressed();
 
@@ -167,7 +232,7 @@ int main()
             }
 
             gameOver = false;
-            countdown = 20;
+            countdown = 60;
             wpm = 0;
         }
         // start game
@@ -266,7 +331,7 @@ int main()
                         cek = false;
                         meteorList[i].alive = true;
                         meteorList[i].kata = arr[GetRandomValue(0, x - 1)];
-                        meteorList[i].rect.x = 610;
+                        meteorList[i].rect.x = WIDTH;
                         meteorList[i].rect.y = GetRandomValue(10, 450);
                         meteorList[i].live = meteorList[i].kata.length();
                     }
