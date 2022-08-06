@@ -1,6 +1,11 @@
 # typing-galaxy
 made with C++ and raylib
 
+Uses
+* C++
+* [raylib](https://www.raylib.com/)
+* [emscripten](https://emscripten.org/)
+
 Play [here](https://prismatic-praline-70e302.netlify.app/)
 
 # Screenshot
