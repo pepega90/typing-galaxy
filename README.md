@@ -1,7 +1,7 @@
 # typing-galaxy
 made with C++ and raylib
 
-Play [here](https://gorgeous-boba-a48ec0.netlify.app/)
+Play [here](https://prismatic-praline-70e302.netlify.app/)
 
 # Screenshot
 <div style="display:flex">
