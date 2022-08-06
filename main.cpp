@@ -146,18 +146,6 @@ int main()
         x++;
     }
 
-    // string kalimat;
-    // ifstream baca("wordList.txt");
-    // if (baca.is_open())
-    // {
-
-    //     while (getline(baca, kalimat))
-    //     {
-    //         arr[x] = kalimat;
-    //         x++;
-    //     }
-    // }
-
     // Meteor explosion
     int regularExpFrame{9};
     int regularCurrentFrame{0};
@@ -188,12 +176,11 @@ int main()
     float rotation = 0;
     bool cek{};
     int idx;
-    int wpm{};
     bool gameOver{};
     bool startGame{};
 
     // membuat countdown
-    int countdown = 60;
+    int countdown = 30;
     float lastUpdateCountdown{1.0};
     float runCountDown{};
 
@@ -232,8 +219,7 @@ int main()
             }
 
             gameOver = false;
-            countdown = 60;
-            wpm = 0;
+            countdown = 30;
         }
         // start game
         if (IsKeyPressed(KEY_SPACE) && !startGame)
@@ -287,7 +273,6 @@ int main()
                     if (valChar == int(meteorList[idx].kata[0]))
                     {
                         PlaySound(typingSFX);
-                        wpm++;
 
                         meteorList[idx].kata.erase(0, 1);
                         laser.active = false;
@@ -428,13 +413,8 @@ int main()
             else
             {
                 // game over scene
-                int result = (wpm / 5) / 1;
-                string convertResult = to_string(result);
-                string hasil = "Your WPM = " + convertResult + " WPM";
-
-                DrawText("Game over", WIDTH / 2 - 80, HEIGHT / 4, 30, YELLOW);
-                DrawText(hasil.c_str(), WIDTH / 2 - 100, HEIGHT / 2 - 50, 20, WHITE);
-                DrawText("Press \"R\" for restart game", WIDTH / 2 - 135, HEIGHT / 2 + 50, 20, WHITE);
+                DrawText("Game over", WIDTH / 2 - 80, HEIGHT / 4, 40, YELLOW);
+                DrawText("Press \"R\" for restart game", WIDTH / 2 - 150, HEIGHT / 2 + 50, 25, WHITE);
             }
         }
 
